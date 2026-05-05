@@ -1,0 +1,37 @@
+version: 2
+
+project_name: sovereignstream-server
+
+builds:
+  - id: sovereignstream
+    main: ./main.go
+    binary: sovereignstream-server
+    env:
+      - CGO_ENABLED=1
+    goos:
+      - linux
+      - windows
+    goarch:
+      - amd64
+
+archives:
+  - id: default
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    files:
+      - ../README.md
+
+dockers:
+  - image_templates:
+      - "ghcr.io/{{ .Env.GITHUB_REPOSITORY_OWNER }}/sovereignstream-server:{{ .Tag }}"
+      - "ghcr.io/{{ .Env.GITHUB_REPOSITORY_OWNER }}/sovereignstream-server:latest"
+    dockerfile: Dockerfile
+    use: buildx
+
+checksum:
+  name_template: checksums.txt
+
+release:
+  draft: true

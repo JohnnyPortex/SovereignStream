@@ -1,0 +1,23 @@
+# macOS/Linux
+.DS_Store
+
+# Node
+web/node_modules/
+web/dist/
+
+# Go build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+server/*.db
+server/tmp/
+
+# Local runtime data
+data/
+hls/
+*.db
+
+# IDE
+.vscode/
+.idea/
